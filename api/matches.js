@@ -2,8 +2,9 @@ import { readStore, writeStore } from '../data/store.js';
 
 export default async function handler(req, res) {
   const store = await readStore();
-  const urlPath = req.url || '';
-  const pathSegments = urlPath.split('/').filter(Boolean);
+  const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
+  const pathname = url.pathname;
+  const pathSegments = pathname.split('/').filter(Boolean);
   const matchId = req.query?.id || pathSegments[pathSegments.length - 1];
 
   if (!matchId || ['api', 'matches'].includes(matchId)) {

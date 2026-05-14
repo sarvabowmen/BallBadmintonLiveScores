@@ -2,7 +2,7 @@ import { createId, readStore, writeStore } from '../data/store.js';
 
 export default async function handler(req, res) {
   const store = await readStore();
-  const url = new URL(req.url || '/', 'http://localhost');
+  const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
   const pathname = url.pathname;
   const pathSegments = pathname.split('/').filter(Boolean);
   const tournamentId = req.query?.id || pathSegments[pathSegments.length - 1];

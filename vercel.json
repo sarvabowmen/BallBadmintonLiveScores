@@ -2,11 +2,19 @@
   "rewrites": [
     {
       "source": "/api/tournaments/:id",
-      "destination": "/api/tournaments?id=:id"
+      "destination": "/api/tournaments"
     },
     {
       "source": "/api/matches/:id",
-      "destination": "/api/matches?id=:id"
+      "destination": "/api/matches"
+    },
+    {
+      "source": "/api/tournaments",
+      "destination": "/api/tournaments"
+    },
+    {
+      "source": "/api/matches",
+      "destination": "/api/matches"
     },
     {
       "source": "/((?!api/).*)",
