@@ -1,16 +1,4 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "api/*.js",
-      "use": "@vercel/node"
-    }
-  ],
   "rewrites": [
     {
       "source": "/api/tournaments/:id",
@@ -19,10 +7,6 @@
     {
       "source": "/api/matches/:id",
       "destination": "/api/matches?id=:id"
-    },
-    {
-      "source": "/api/auth/:path*",
-      "destination": "/api/auth"
     },
     {
       "source": "/((?!api/).*)",

@@ -13,9 +13,11 @@ async function ensureStore() {
     // On Vercel, if not in /tmp, we might want to seed it from the repo's data/store.json
     if (isVercel) {
       try {
-        const seed = await fs.readFile(path.join(process.cwd(), 'data', 'store.json'), 'utf-8');
+        const seedPath = path.resolve(process.cwd(), 'data', 'store.json');
+        const seed = await fs.readFile(seedPath, 'utf-8');
         await fs.writeFile(storePath, seed);
-      } catch {
+      } catch (err) {
+        console.error('Failed to seed store from data/store.json:', err);
         await fs.writeFile(storePath, JSON.stringify({ tournaments: [], matches: [] }, null, 2));
       }
     } else {

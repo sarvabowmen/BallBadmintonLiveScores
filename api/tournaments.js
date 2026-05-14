@@ -44,18 +44,12 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const isListRequest = pathname === '/api/tournaments' || pathname === '/api/tournaments/';
+    // If tournamentId is 'tournaments', 'api', or empty, it's likely a list request
+    const isDetailRequest = tournamentId && !['api', 'tournaments'].includes(tournamentId);
 
-    if (isListRequest) {
+    if (!isDetailRequest) {
       res.setHeader('Content-Type', 'application/json');
       return res.end(JSON.stringify({ tournaments: store.tournaments }));
-    }
-
-    const tournamentId = pathSegments[pathSegments.length - 1];
-    if (!tournamentId || pathSegments[pathSegments.length - 2] !== 'tournaments') {
-      res.statusCode = 400;
-      res.setHeader('Content-Type', 'application/json');
-      return res.end(JSON.stringify({ error: 'Tournament ID required' }));
     }
 
     const tournament = store.tournaments.find((item) => item.id === tournamentId);
