@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { initialStore } from './initialStore.js';
 
 const isVercel = process.env.VERCEL === '1';
 const storePath = isVercel 
@@ -17,11 +18,11 @@ async function ensureStore() {
         const seed = await fs.readFile(seedPath, 'utf-8');
         await fs.writeFile(storePath, seed);
       } catch (err) {
-        console.error('Failed to seed store from data/store.json:', err);
-        await fs.writeFile(storePath, JSON.stringify({ tournaments: [], matches: [] }, null, 2));
+        console.error('Failed to seed store from data/store.json, using initialStore:', err);
+        await fs.writeFile(storePath, JSON.stringify(initialStore, null, 2));
       }
     } else {
-      await fs.writeFile(storePath, JSON.stringify({ tournaments: [], matches: [] }, null, 2));
+      await fs.writeFile(storePath, JSON.stringify(initialStore, null, 2));
     }
   }
 }
