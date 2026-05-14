@@ -125,7 +125,7 @@ export default function CreateTournament() {
           </p>
         </div>
       </div>
-      <div className="card" style={{ maxWidth: 760 }}>
+      <div className="card" style={{ width: '100%', maxWidth: '800px' }}>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="name">Tournament Name</label>

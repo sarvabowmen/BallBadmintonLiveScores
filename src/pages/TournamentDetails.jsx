@@ -87,6 +87,7 @@ export default function TournamentDetails() {
         {matches.length === 0 ? (
           <p>No fixtures uploaded for this tournament.</p>
         ) : (
+        <div className="table-container">
           <table className="schedule-table">
             <thead>
               <tr>
@@ -158,6 +159,7 @@ export default function TournamentDetails() {
               ))}
             </tbody>
           </table>
+        </div>
         )}
       </div>
     </div>

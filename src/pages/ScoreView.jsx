@@ -74,34 +74,36 @@ export default function ScoreView() {
 
           <div className="list-row">
             <h3>Set summary</h3>
-            <table className="score-table">
-              <thead>
-                <tr>
-                  <th>Set</th>
-                  <th>{match.teamA}</th>
-                  <th>{match.teamB}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sets.map((set, i) => (
-                  <tr key={i}>
-                    <td>{i + 1}</td>
-                    <td style={{ 
-                      backgroundColor: setWinners[i] === 'teamA' ? 'rgba(76, 175, 80, 0.15)' : 'transparent',
-                      fontWeight: setWinners[i] === 'teamA' ? 'bold' : 'normal'
-                    }}>
-                      {set.teamA} {setWinners[i] === 'teamA' && '✓'}
-                    </td>
-                    <td style={{ 
-                      backgroundColor: setWinners[i] === 'teamB' ? 'rgba(76, 175, 80, 0.15)' : 'transparent',
-                      fontWeight: setWinners[i] === 'teamB' ? 'bold' : 'normal'
-                    }}>
-                      {set.teamB} {setWinners[i] === 'teamB' && '✓'}
-                    </td>
+            <div className="table-container">
+              <table className="score-table">
+                <thead>
+                  <tr>
+                    <th>Set</th>
+                    <th>{match.teamA}</th>
+                    <th>{match.teamB}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {sets.map((set, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td style={{ 
+                        backgroundColor: setWinners[i] === 'teamA' ? 'rgba(76, 175, 80, 0.15)' : 'transparent',
+                        fontWeight: setWinners[i] === 'teamA' ? 'bold' : 'normal'
+                      }}>
+                        {set.teamA} {setWinners[i] === 'teamA' && '✓'}
+                      </td>
+                      <td style={{ 
+                        backgroundColor: setWinners[i] === 'teamB' ? 'rgba(76, 175, 80, 0.15)' : 'transparent',
+                        fontWeight: setWinners[i] === 'teamB' ? 'bold' : 'normal'
+                      }}>
+                        {set.teamB} {setWinners[i] === 'teamB' && '✓'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         

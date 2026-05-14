@@ -165,50 +165,52 @@ export default function MatchDetails({ editable = false }) {
           </div>
           <div className="list-row">
             <h3>Set summary</h3>
-            <table className="score-table">
-              <thead>
-                <tr>
-                  <th>Set</th>
-                  <th>{match.teamA}</th>
-                  <th>{match.teamB}</th>
-                  {editable && <th>Set Winner</th>}
-                </tr>
-              </thead>
-              <tbody>
-                {sets.map((set, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td style={{ backgroundColor: setWinners[index] === 'teamA' ? 'rgba(76, 175, 80, 0.1)' : 'transparent' }}>
-                      {editable ? (
-                        <input type="number" min="0" max="60" value={set.teamA} onChange={(event) => handleScoreChange(index, 'teamA', event.target.value)} />
-                      ) : (
-                        <span style={{ fontWeight: setWinners[index] === 'teamA' ? 'bold' : 'normal' }}>{set.teamA}</span>
-                      )}
-                    </td>
-                    <td style={{ backgroundColor: setWinners[index] === 'teamB' ? 'rgba(76, 175, 80, 0.1)' : 'transparent' }}>
-                      {editable ? (
-                        <input type="number" min="0" max="60" value={set.teamB} onChange={(event) => handleScoreChange(index, 'teamB', event.target.value)} />
-                      ) : (
-                        <span style={{ fontWeight: setWinners[index] === 'teamB' ? 'bold' : 'normal' }}>{set.teamB}</span>
-                      )}
-                    </td>
-                    {editable && (
-                      <td>
-                        <select value={setWinners[index] || ''} onChange={(e) => setSetWinners(prev => {
-                          const next = [...prev];
-                          next[index] = e.target.value || null;
-                          return next;
-                        })}>
-                          <option value="">None</option>
-                          <option value="teamA">{match.teamA}</option>
-                          <option value="teamB">{match.teamB}</option>
-                        </select>
-                      </td>
-                    )}
+            <div className="table-container">
+              <table className="score-table">
+                <thead>
+                  <tr>
+                    <th>Set</th>
+                    <th>{match.teamA}</th>
+                    <th>{match.teamB}</th>
+                    {editable && <th>Set Winner</th>}
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {sets.map((set, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td style={{ backgroundColor: setWinners[index] === 'teamA' ? 'rgba(76, 175, 80, 0.1)' : 'transparent' }}>
+                        {editable ? (
+                          <input type="number" min="0" max="60" value={set.teamA} onChange={(event) => handleScoreChange(index, 'teamA', event.target.value)} />
+                        ) : (
+                          <span style={{ fontWeight: setWinners[index] === 'teamA' ? 'bold' : 'normal' }}>{set.teamA}</span>
+                        )}
+                      </td>
+                      <td style={{ backgroundColor: setWinners[index] === 'teamB' ? 'rgba(76, 175, 80, 0.1)' : 'transparent' }}>
+                        {editable ? (
+                          <input type="number" min="0" max="60" value={set.teamB} onChange={(event) => handleScoreChange(index, 'teamB', event.target.value)} />
+                        ) : (
+                          <span style={{ fontWeight: setWinners[index] === 'teamB' ? 'bold' : 'normal' }}>{set.teamB}</span>
+                        )}
+                      </td>
+                      {editable && (
+                        <td>
+                          <select value={setWinners[index] || ''} onChange={(e) => setSetWinners(prev => {
+                            const next = [...prev];
+                            next[index] = e.target.value || null;
+                            return next;
+                          })}>
+                            <option value="">None</option>
+                            <option value="teamA">{match.teamA}</option>
+                            <option value="teamB">{match.teamB}</option>
+                          </select>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         {editable && (
